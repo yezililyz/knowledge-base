@@ -1,0 +1,1447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Capital Events × Web3 — Match Intelligence Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Space+Grotesk:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #080C12;
+    --surface: #0F1520;
+    --card: #141B28;
+    --card-border: #1E2D42;
+    --teal: #1D9E75;
+    --teal-light: #5DCAA5;
+    --teal-dim: #0F6E56;
+    --amber: #EF9F27;
+    --amber-dim: #854F0B;
+    --coral: #D85A30;
+    --coral-dim: #993C1D;
+    --purple: #7F77DD;
+    --purple-dim: #3C3489;
+    --text: #D8E0ED;
+    --text-sec: #7A8BA5;
+    --text-dim: #3E4E63;
+    --border: #1A2840;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+  header {
+    padding: 2.5rem 2rem 1.5rem;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg);
+    position: sticky; top: 0; z-index: 100;
+  }
+  .header-inner { max-width: 1100px; margin: 0 auto; }
+  .header-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--teal);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+  }
+  header h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: -0.02em;
+  }
+  header p {
+    color: var(--text-sec);
+    font-size: 13px;
+    margin-top: 0.25rem;
+  }
+  nav {
+    display: flex;
+    gap: 0;
+    margin-top: 1.25rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .tab {
+    padding: 0.6rem 1.1rem;
+    font-size: 12.5px;
+    font-weight: 500;
+    color: var(--text-sec);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.15s;
+    font-family: 'Space Grotesk', sans-serif;
+    background: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    white-space: nowrap;
+    letter-spacing: 0.01em;
+  }
+  .tab:hover { color: var(--text); }
+  .tab.active { color: var(--teal-light); border-bottom-color: var(--teal); }
+  .tab-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: var(--text-dim);
+    margin-right: 5px;
+  }
+  main { max-width: 1100px; margin: 0 auto; padding: 2rem; }
+  .section { display: none; }
+  .section.active { display: block; }
+ 
+  /* SECTION HEADERS */
+  .sec-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: var(--teal);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+  .sec-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: -0.03em;
+    margin-bottom: 0.5rem;
+  }
+  .sec-desc {
+    color: var(--text-sec);
+    font-size: 14px;
+    max-width: 600px;
+    margin-bottom: 2rem;
+    line-height: 1.7;
+  }
+ 
+  /* CARDS */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 1.25rem;
+  }
+  .card-sm {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    padding: 1rem;
+  }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; }
+ 
+  /* TAGS */
+  .tag {
+    display: inline-block;
+    font-family: 'Space Mono', monospace;
+    font-size: 10.5px;
+    padding: 3px 8px;
+    border-radius: 4px;
+    margin: 2px;
+  }
+  .tag-teal { background: rgba(29,158,117,0.12); color: var(--teal-light); border: 1px solid rgba(29,158,117,0.25); }
+  .tag-amber { background: rgba(239,159,39,0.1); color: var(--amber); border: 1px solid rgba(239,159,39,0.2); }
+  .tag-coral { background: rgba(216,90,48,0.1); color: #F09575; border: 1px solid rgba(216,90,48,0.2); }
+  .tag-purple { background: rgba(127,119,221,0.1); color: #AFA9EC; border: 1px solid rgba(127,119,221,0.2); }
+  .tag-blue { background: rgba(55,138,221,0.1); color: #85B7EB; border: 1px solid rgba(55,138,221,0.2); }
+  .tag-gray { background: rgba(100,120,145,0.1); color: var(--text-sec); border: 1px solid rgba(100,120,145,0.2); }
+ 
+  /* ========== SECTION 1: LANDSCAPE ========== */
+  .event-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .event-row:last-child { border-bottom: none; }
+  .event-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    margin-top: 5px;
+    flex-shrink: 0;
+  }
+  .event-name { font-weight: 600; font-size: 14px; color: #fff; }
+  .event-meta { font-size: 12px; color: var(--text-sec); margin-top: 2px; }
+  .event-type { font-family: 'Space Mono', monospace; font-size: 10px; }
+  .event-why { font-size: 13px; color: var(--text-sec); margin-top: 4px; }
+ 
+  .axis-block {
+    padding: 1rem 1.25rem;
+    border-left: 3px solid;
+    margin-bottom: 0.75rem;
+    background: rgba(255,255,255,0.02);
+    border-radius: 0 8px 8px 0;
+  }
+  .axis-block h4 { font-size: 13px; font-weight: 600; color: #fff; }
+  .axis-block p { font-size: 12.5px; color: var(--text-sec); margin-top: 3px; }
+ 
+  /* ========== SECTION 2: PERSONAS ========== */
+  .persona-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; margin-bottom: 1.5rem; }
+  .persona-card {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 10px;
+    padding: 1rem;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .persona-card:hover { border-color: var(--teal-dim); transform: translateY(-1px); }
+  .persona-card.selected { border-color: var(--teal); background: rgba(29,158,117,0.07); }
+  .persona-avatar {
+    width: 36px; height: 36px;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    margin-bottom: 0.6rem;
+  }
+  .persona-name { font-size: 13px; font-weight: 600; color: #fff; }
+  .persona-sub { font-size: 11.5px; color: var(--text-sec); margin-top: 2px; }
+  .persona-detail {
+    background: var(--card);
+    border: 1px solid var(--teal-dim);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-top: 0.5rem;
+  }
+  .detail-row {
+    display: flex;
+    gap: 1rem;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+  }
+  .detail-row:last-child { border-bottom: none; }
+  .detail-label { color: var(--text-sec); width: 130px; flex-shrink: 0; font-family: 'Space Mono', monospace; font-size: 11px; padding-top: 2px; }
+  .detail-val { color: var(--text); flex: 1; }
+ 
+  /* ========== SECTION 3: MECHANICS ========== */
+  .dim-card {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 10px;
+    padding: 1.25rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .dim-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 100%;
+  }
+  .dim-number {
+    font-family: 'Space Mono', monospace;
+    font-size: 28px;
+    font-weight: 700;
+    opacity: 0.12;
+    position: absolute;
+    top: 0.75rem; right: 1rem;
+  }
+  .dim-title { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: 0.35rem; }
+  .dim-desc { font-size: 13px; color: var(--text-sec); line-height: 1.65; }
+  .dim-example {
+    margin-top: 0.75rem;
+    padding: 0.6rem 0.75rem;
+    background: rgba(255,255,255,0.03);
+    border-radius: 6px;
+    font-size: 12px;
+    color: var(--text-sec);
+    font-family: 'Space Mono', monospace;
+  }
+  .dim-example span { color: var(--teal-light); }
+ 
+  .score-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 0.5rem;
+  }
+  .score-label { font-size: 12px; color: var(--text-sec); width: 80px; font-family: 'Space Mono', monospace; }
+  .bar-track { flex: 1; height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 2px; }
+ 
+  /* ========== SECTION 4: EXAMPLES ========== */
+  .match-card {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 1.25rem;
+  }
+  .match-header {
+    padding: 1.25rem 1.25rem 1rem;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  .match-profiles {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex: 1;
+  }
+  .profile-pill {
+    padding: 0.4rem 0.75rem;
+    border-radius: 6px;
+    font-size: 12.5px;
+    font-weight: 600;
+  }
+  .match-arrow {
+    color: var(--text-dim);
+    font-family: 'Space Mono', monospace;
+    font-size: 14px;
+  }
+  .match-score-badge {
+    font-family: 'Space Mono', monospace;
+    font-size: 22px;
+    font-weight: 700;
+    text-align: right;
+    flex-shrink: 0;
+  }
+  .match-score-label { font-size: 10px; color: var(--text-sec); text-align: right; letter-spacing: 0.1em; }
+  .match-body {
+    padding: 0 1.25rem 1.25rem;
+    display: none;
+  }
+  .match-body.open { display: block; }
+  .match-toggle {
+    width: 100%;
+    padding: 0.6rem 1.25rem;
+    background: rgba(255,255,255,0.03);
+    border: none;
+    border-top: 1px solid var(--border);
+    color: var(--text-sec);
+    font-size: 12px;
+    cursor: pointer;
+    text-align: center;
+    font-family: 'Space Mono', monospace;
+    letter-spacing: 0.08em;
+    transition: all 0.15s;
+  }
+  .match-toggle:hover { background: rgba(29,158,117,0.06); color: var(--teal-light); }
+  .dim-scores { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.5rem; margin: 0.75rem 0; }
+  .dim-score-item {
+    padding: 0.5rem 0.6rem;
+    background: rgba(255,255,255,0.03);
+    border-radius: 6px;
+  }
+  .dim-score-name { font-size: 10.5px; color: var(--text-sec); font-family: 'Space Mono', monospace; }
+  .dim-score-val { font-size: 15px; font-weight: 600; margin-top: 2px; }
+  .rationale-block {
+    background: rgba(29,158,117,0.06);
+    border: 1px solid rgba(29,158,117,0.2);
+    border-radius: 8px;
+    padding: 1rem;
+    margin-top: 0.75rem;
+  }
+  .rationale-block h5 { font-size: 11px; font-family: 'Space Mono', monospace; color: var(--teal-light); letter-spacing: 0.1em; margin-bottom: 0.5rem; }
+  .rationale-block p { font-size: 13px; color: var(--text-sec); line-height: 1.7; }
+  .rationale-block strong { color: var(--text); font-weight: 500; }
+  .flag-list { margin-top: 0.75rem; }
+  .flag-item { display: flex; gap: 0.5rem; align-items: flex-start; margin-bottom: 0.35rem; font-size: 13px; color: var(--text-sec); }
+  .flag-icon { flex-shrink: 0; width: 16px; height: 16px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 700; margin-top: 2px; }
+  .flag-pos { background: rgba(29,158,117,0.2); color: var(--teal-light); }
+  .flag-neg { background: rgba(216,90,48,0.2); color: #F09575; }
+  .flag-neu { background: rgba(239,159,39,0.15); color: var(--amber); }
+ 
+  /* ========== SECTION 5: PRACTICE ========== */
+  .practice-card {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 14px;
+    padding: 2rem;
+    max-width: 760px;
+  }
+  .practice-profiles {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+  .practice-profile-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem;
+  }
+  .practice-profile-type { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.15em; margin-bottom: 0.4rem; }
+  .practice-profile-name { font-size: 14px; font-weight: 600; color: #fff; margin-bottom: 0.25rem; }
+  .practice-profile-detail { font-size: 12.5px; color: var(--text-sec); line-height: 1.6; }
+  .practice-vs {
+    text-align: center;
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    color: var(--text-dim);
+  }
+  .reveal-btn {
+    display: inline-block;
+    padding: 0.65rem 1.5rem;
+    background: var(--teal-dim);
+    border: 1px solid var(--teal);
+    border-radius: 8px;
+    color: var(--teal-light);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: 'Space Grotesk', sans-serif;
+    transition: all 0.15s;
+  }
+  .reveal-btn:hover { background: rgba(29,158,117,0.25); }
+  .next-btn {
+    display: inline-block;
+    padding: 0.65rem 1.5rem;
+    background: transparent;
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    color: var(--text-sec);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: 'Space Grotesk', sans-serif;
+    margin-left: 0.75rem;
+    transition: all 0.15s;
+  }
+  .next-btn:hover { border-color: var(--text-sec); color: var(--text); }
+  .practice-reveal {
+    background: rgba(29,158,117,0.05);
+    border: 1px solid rgba(29,158,117,0.2);
+    border-radius: 10px;
+    padding: 1.25rem;
+    margin-top: 1.5rem;
+    display: none;
+  }
+  .practice-reveal.open { display: block; }
+  .verdict-row { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; }
+  .verdict-score { font-family: 'Syne', sans-serif; font-size: 3rem; font-weight: 800; line-height: 1; }
+  .verdict-label { font-size: 1.1rem; font-weight: 600; color: #fff; }
+  .verdict-sub { font-size: 13px; color: var(--text-sec); margin-top: 2px; }
+  .progress-indicator {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 1.5rem;
+  }
+  .prog-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--border);
+  }
+  .prog-dot.done { background: var(--teal); }
+  .prog-dot.current { background: var(--amber); }
+ 
+  /* UTILITY */
+  .mono { font-family: 'Space Mono', monospace; }
+  .text-teal { color: var(--teal-light); }
+  .text-amber { color: var(--amber); }
+  .text-coral { color: #F09575; }
+  .text-purple { color: #AFA9EC; }
+  .divider { border: none; border-top: 1px solid var(--border); margin: 1.5rem 0; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .subsec { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; color: #fff; margin: 1.5rem 0 0.75rem; letter-spacing: -0.01em; }
+  .info-bar {
+    background: rgba(127,119,221,0.08);
+    border: 1px solid rgba(127,119,221,0.2);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    font-size: 13px;
+    color: #AFA9EC;
+    margin-bottom: 1.5rem;
+  }
+</style>
+</head>
+<body>
+ 
+<header>
+  <div class="header-inner">
+    <div class="header-tag">XVentures · Domain Intelligence</div>
+    <h1>Capital Events × Web3 — Match Training</h1>
+    <p>Build the vocabulary, personas, and intuition to articulate match rationale in real-world event contexts.</p>
+    <nav>
+      <button class="tab active" onclick="switchTab(0)"><span class="tab-num">01</span> Landscape</button>
+      <button class="tab" onclick="switchTab(1)"><span class="tab-num">02</span> Persona Library</button>
+      <button class="tab" onclick="switchTab(2)"><span class="tab-num">03</span> Match Mechanics</button>
+      <button class="tab" onclick="switchTab(3)"><span class="tab-num">04</span> Match Examples</button>
+      <button class="tab" onclick="switchTab(4)"><span class="tab-num">05</span> Practice Mode</button>
+    </nav>
+  </div>
+</header>
+ 
+<main>
+ 
+<!-- ========= SECTION 1: LANDSCAPE ========= -->
+<div class="section active" id="sec-0">
+  <div class="sec-label">Context</div>
+  <div class="sec-title">The Capital Events Ecosystem</div>
+  <p class="sec-desc">Capital events sit at the intersection of dealmaking, ecosystem building, and knowledge exchange. Understanding who shows up and why is the foundation for intelligent matching.</p>
+ 
+  <div class="two-col">
+    <div>
+      <div class="subsec">Event archetypes</div>
+      <div class="card">
+        <div class="event-row">
+          <div class="event-dot" style="background: var(--teal)"></div>
+          <div>
+            <div class="event-name">Crypto-Native Conferences</div>
+            <div class="event-meta"><span class="tag tag-teal">Token2049</span><span class="tag tag-teal">Consensus</span><span class="tag tag-teal">ETHGlobal</span><span class="tag tag-teal">Permissionless</span></div>
+            <div class="event-why">High density of builders, DeFi founders, crypto VCs, protocol teams. Token launch speculation is active. Best for early-stage and infrastructure deals.</div>
+          </div>
+        </div>
+        <div class="event-row">
+          <div class="event-dot" style="background: var(--amber)"></div>
+          <div>
+            <div class="event-name">Crossover / TradFi-Crypto</div>
+            <div class="event-meta"><span class="tag tag-amber">Davos side events</span><span class="tag tag-amber">Hong Kong FinTech Week</span><span class="tag tag-amber">Paris Blockchain Week</span></div>
+            <div class="event-why">Family offices, institutional investors, regulatory figures, and RWA founders converge. Lower speculation, higher capital — right place for Series A+ and institutional DeFi.</div>
+          </div>
+        </div>
+        <div class="event-row">
+          <div class="event-dot" style="background: var(--purple)"></div>
+          <div>
+            <div class="event-name">VC & LP Summits</div>
+            <div class="event-meta"><span class="tag tag-purple">SoftBank World</span><span class="tag tag-purple">a16z Summit</span><span class="tag tag-purple">Sequoia Scout events</span></div>
+            <div class="event-why">Portfolio-company dominated. External founders need invitation. Best for warm introductions, not cold pitches. Match value: LP introductions for fund managers.</div>
+          </div>
+        </div>
+        <div class="event-row">
+          <div class="event-dot" style="background: var(--coral)"></div>
+          <div>
+            <div class="event-name">Ecosystem / Protocol Summits</div>
+            <div class="event-meta"><span class="tag tag-coral">Solana Breakpoint</span><span class="tag tag-coral">Optimism RetroPGF</span><span class="tag tag-coral">Near Protocol</span></div>
+            <div class="event-why">Protocol BD teams, ecosystem grants, developer acquisition. Match value: Builders looking for technical partnerships and non-dilutive funding.</div>
+          </div>
+        </div>
+        <div class="event-row">
+          <div class="event-dot" style="background: var(--text-sec)"></div>
+          <div>
+            <div class="event-name">Regulatory & Policy Forums</div>
+            <div class="event-meta"><span class="tag tag-gray">MiCA Implementation</span><span class="tag tag-gray">FSOC Digital Assets</span><span class="tag tag-gray">BIS Innovation Hub</span></div>
+            <div class="event-why">Regulators, compliance-first founders, institutional players. Match value: Regulatory intelligence, sandbox pilots, frameworks for compliant launches.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+ 
+    <div>
+      <div class="subsec">What drives attendance intent</div>
+      <div class="axis-block" style="border-color: var(--teal)">
+        <h4 class="text-teal">Deploying capital</h4>
+        <p>VCs, angels, protocol treasuries, corporate VCs — primary agenda is sourcing and closing deals. Time pressure is high. Brief, sharp pitches valued.</p>
+      </div>
+      <div class="axis-block" style="border-color: var(--amber)">
+        <h4 class="text-amber">Raising capital</h4>
+        <p>Founders pre-seed through Series B. Goal is meetings, not panels. Often at multiple events per quarter. Warm intros convert 3-4x better than cold outreach.</p>
+      </div>
+      <div class="axis-block" style="border-color: var(--purple)">
+        <h4 class="text-purple">Building partnerships</h4>
+        <p>Protocol BD, exchange BD, corporate Web3 teams. Looking for integrations, listing agreements, strategic MOUs. Often underestimated as match targets.</p>
+      </div>
+      <div class="axis-block" style="border-color: var(--coral)">
+        <h4 class="text-coral">Regulatory intelligence</h4>
+        <p>Regulators, policy advisors, legal/compliance leads. Not deploying capital but shaping the rules. High-value matches for compliance-first founders.</p>
+      </div>
+      <div class="axis-block" style="border-color: var(--text-dim)">
+        <h4 style="color: var(--text-sec)">Market intelligence / press</h4>
+        <p>Analysts, journalists, researchers. Secondary match value but critical for narrative building and ecosystem positioning.</p>
+      </div>
+ 
+      <div class="subsec">The signal vs. noise problem</div>
+      <div class="card-sm">
+        <p style="font-size: 13px; color: var(--text-sec); line-height: 1.75">A 1,500-person crypto event generates ~1.1M possible pairings. Without curation, attendees default to <strong style="color:var(--text)">social proximity</strong> (people they already know), <strong style="color:var(--text)">panel prestige</strong> (whoever just spoke), or <strong style="color:var(--text)">random hallway encounters</strong>. Structured matching replaces serendipity with intentionality — turning a conference into a capital deployment engine.</p>
+      </div>
+    </div>
+  </div>
+ 
+  <hr class="divider">
+ 
+  <div class="subsec">Web3 deal structure vocabulary</div>
+  <div class="grid-4">
+    <div class="card-sm">
+      <div class="tag tag-teal" style="margin-bottom:0.5rem">SAFE</div>
+      <div style="font-size:13px;color:var(--text-sec)">Simple Agreement for Future Equity. Standard pre-seed/seed instrument. Converts at next priced round. Common in Web2-style Web3 companies.</div>
+    </div>
+    <div class="card-sm">
+      <div class="tag tag-amber" style="margin-bottom:0.5rem">SAFT</div>
+      <div style="font-size:13px;color:var(--text-sec)">Simple Agreement for Future Tokens. Token equivalent of SAFE. Pre-sells future token allocation to accredited investors. Used heavily 2017-2022.</div>
+    </div>
+    <div class="card-sm">
+      <div class="tag tag-purple" style="margin-bottom:0.5rem">Token Warrant</div>
+      <div style="font-size:13px;color:var(--text-sec)">Equity + token rights bundle. Investor takes equity via SAFE/priced round AND receives warrant for token allocation at TGE. Paradigm popularized this structure.</div>
+    </div>
+    <div class="card-sm">
+      <div class="tag tag-coral" style="margin-bottom:0.5rem">TGE</div>
+      <div style="font-size:13px;color:var(--text-sec)">Token Generation Event. The public launch of a project's token. Timing and unlock schedules (vesting cliff, linear vesting) are major negotiation points with investors.</div>
+    </div>
+    <div class="card-sm">
+      <div class="tag tag-blue" style="margin-bottom:0.5rem">TVL</div>
+      <div style="font-size:13px;color:var(--text-sec)">Total Value Locked. Key DeFi traction metric. The dollar value of assets deposited in a protocol. Like ARR for SaaS — primary signal of DeFi product-market fit.</div>
+    </div>
+    <div class="card-sm">
+      <div class="tag tag-gray" style="margin-bottom:0.5rem">RetroPGF</div>
+      <div style="font-size:13px;color:var(--text-sec)">Retroactive Public Goods Funding. Optimism's grant mechanism — rewards past builders with token grants. Non-dilutive. Growing model across L2 ecosystems.</div>
+    </div>
+    <div class="card-sm">
+      <div class="tag tag-teal" style="margin-bottom:0.5rem">FDV</div>
+      <div style="font-size:13px;color:var(--text-sec)">Fully Diluted Valuation. Token price × total supply. Investors care about FDV at TGE vs. entry valuation. High FDV = compressed upside. Critical for fund return math.</div>
+    </div>
+    <div class="card-sm">
+      <div class="tag tag-amber" style="margin-bottom:0.5rem">RWA</div>
+      <div style="font-size:13px;color:var(--text-sec)">Real World Assets. Tokenized bonds, real estate, private credit, commodities. Fastest-growing segment in 2024-25. Attracts TradFi institutions and family offices.</div>
+    </div>
+  </div>
+</div>
+ 
+<!-- ========= SECTION 2: PERSONAS ========= -->
+<div class="section" id="sec-1">
+  <div class="sec-label">Personas</div>
+  <div class="sec-title">The Persona Library</div>
+  <p class="sec-desc">Click any persona to expand their full profile — investment thesis, check size, structural preferences, ideal matches, and red flags.</p>
+ 
+  <div class="info-bar">Investor personas deploy capital. Builder personas raise it. Other personas create non-capital value — BD, regulatory access, distribution. All three types appear at capital events and all three drive match quality.</div>
+ 
+  <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--text-sec);letter-spacing:0.12em;margin-bottom:0.5rem">INVESTOR PERSONAS</div>
+  <div class="persona-grid" id="investor-grid"></div>
+  <div id="investor-detail"></div>
+ 
+  <hr class="divider">
+ 
+  <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--text-sec);letter-spacing:0.12em;margin-bottom:0.5rem">BUILDER PERSONAS</div>
+  <div class="persona-grid" id="builder-grid"></div>
+  <div id="builder-detail"></div>
+ 
+  <hr class="divider">
+ 
+  <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--text-sec);letter-spacing:0.12em;margin-bottom:0.5rem">OTHER PERSONAS</div>
+  <div class="persona-grid" id="other-grid"></div>
+  <div id="other-detail"></div>
+</div>
+ 
+<!-- ========= SECTION 3: MECHANICS ========= -->
+<div class="section" id="sec-2">
+  <div class="sec-label">Framework</div>
+  <div class="sec-title">Match Mechanics</div>
+  <p class="sec-desc">Six dimensions that determine match quality. A strong match scores well on all six — but the weighting shifts based on context. Learn to read which dimensions matter most for each persona combination.</p>
+ 
+  <div class="grid-2" id="dimensions-grid"></div>
+ 
+  <hr class="divider">
+ 
+  <div class="subsec">How dimensions interact</div>
+  <div class="two-col">
+    <div class="card">
+      <div style="font-size:13px;font-weight:600;color:#fff;margin-bottom:0.75rem">The knockout rule</div>
+      <p style="font-size:13px;color:var(--text-sec);line-height:1.75">Some dimensions are <strong style="color:var(--text)">disqualifying</strong> regardless of scores elsewhere. A Family Office investor who requires equity can never match a DeFi-native founder who will only issue tokens — no amount of thesis alignment rescues that structural incompatibility. Always check structural fit before scoring other dimensions.</p>
+      <div style="margin-top:0.75rem;padding:0.75rem;background:rgba(216,90,48,0.06);border:1px solid rgba(216,90,48,0.2);border-radius:6px;font-size:12.5px;color:#F09575">
+        <strong style="color:#F09575">Hard knockouts:</strong> Token/equity mismatch · Stage outside investment mandate · Check size vs. round size incompatibility · Regulatory conflict (anon team + institutional investor)
+      </div>
+    </div>
+    <div class="card">
+      <div style="font-size:13px;font-weight:600;color:#fff;margin-bottom:0.75rem">Strategic value amplifiers</div>
+      <p style="font-size:13px;color:var(--text-sec);line-height:1.75">A <strong style="color:var(--text)">Corporate VC</strong> at a 3/5 thesis alignment can still be a 5/5 match if the strategic synergy is exceptional. Coinbase Ventures in a self-custody wallet deal may underwrite at lower valuation *and* provide a distribution channel worth more than the check. When evaluating, ask: <em style="color:var(--text-sec)">what does this investor unlock beyond capital?</em></p>
+      <div style="margin-top:0.75rem;padding:0.75rem;background:rgba(29,158,117,0.06);border:1px solid rgba(29,158,117,0.2);border-radius:6px;font-size:12.5px;color:var(--teal-light)">
+        <strong style="color:var(--teal-light)">Value amplifiers:</strong> Distribution access · Portfolio introductions · Regulatory relationships · Exchange listing leverage · Technical/BD team support
+      </div>
+    </div>
+  </div>
+ 
+  <hr class="divider">
+  <div class="subsec">Quick scoring reference</div>
+  <div class="card">
+    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:0.75rem;text-align:center">
+      <div>
+        <div style="font-family:'Space Mono',monospace;font-size:1.5rem;font-weight:700;color:var(--teal-light)">5</div>
+        <div style="font-size:11px;color:var(--teal);font-weight:600;margin-bottom:3px">Must-Meet</div>
+        <div style="font-size:11px;color:var(--text-sec)">All 6 dimensions aligned. High mutual urgency. Should close within 60 days of meeting.</div>
+      </div>
+      <div>
+        <div style="font-family:'Space Mono',monospace;font-size:1.5rem;font-weight:700;color:#85B7EB">4</div>
+        <div style="font-size:11px;color:#378ADD;font-weight:600;margin-bottom:3px">High Potential</div>
+        <div style="font-size:11px;color:var(--text-sec)">One dimension moderate. Strong interest but needs more conversation. Priority follow-up.</div>
+      </div>
+      <div>
+        <div style="font-family:'Space Mono',monospace;font-size:1.5rem;font-weight:700;color:var(--amber)">3</div>
+        <div style="font-size:11px;color:var(--amber);font-weight:600;margin-bottom:3px">Worth Exploring</div>
+        <div style="font-size:11px;color:var(--text-sec)">Two dimensions moderate. Exploratory meeting. Useful intel even if deal unlikely.</div>
+      </div>
+      <div>
+        <div style="font-family:'Space Mono',monospace;font-size:1.5rem;font-weight:700;color:#F09575">2</div>
+        <div style="font-size:11px;color:var(--coral);font-weight:600;margin-bottom:3px">Low Signal</div>
+        <div style="font-size:11px;color:var(--text-sec)">Structural or thesis mismatch. Networking value only. Low priority.</div>
+      </div>
+      <div>
+        <div style="font-family:'Space Mono',monospace;font-size:1.5rem;font-weight:700;color:var(--text-dim)">1</div>
+        <div style="font-size:11px;color:var(--text-dim);font-weight:600;margin-bottom:3px">Mismatch</div>
+        <div style="font-size:11px;color:var(--text-sec)">Hard knockout present. Not a productive meeting. Avoid false hope.</div>
+      </div>
+    </div>
+  </div>
+</div>
+ 
+<!-- ========= SECTION 4: EXAMPLES ========= -->
+<div class="section" id="sec-3">
+  <div class="sec-label">Real scenarios</div>
+  <div class="sec-title">Match Examples</div>
+  <p class="sec-desc">Eight real-world-style match scenarios with full scoring and rationale. Study these until you can reproduce the reasoning from memory — they're the basis of your pitch to investors and founders at events.</p>
+  <div id="examples-container"></div>
+</div>
+ 
+<!-- ========= SECTION 5: PRACTICE ========= -->
+<div class="section" id="sec-4">
+  <div class="sec-label">Self-assessment</div>
+  <div class="sec-title">Practice Mode</div>
+  <p class="sec-desc">Read the two profiles below. Before revealing the answer, try to articulate the match score and key rationale points in your head. Then reveal to check your reasoning.</p>
+  <div id="practice-container"></div>
+</div>
+ 
+</main>
+ 
+<script>
+const PERSONAS = {
+  investors: [
+    {
+      id: 'crypto-vc',
+      name: 'Crypto-Native VC',
+      sub: 'Paradigm · Multicoin · Pantera · a16z crypto',
+      avatar: 'CV',
+      color: 'teal',
+      check: '$1M – $20M',
+      stages: 'Seed → Series A',
+      thesis: 'Infrastructure (ZK, DA, sequencers), DeFi primitives, consumer crypto, L1/L2 ecosystem plays',
+      structure: 'Token warrant (SAFE + warrant), SAFT, or equity-only for infra companies',
+      token: 'Strongly preferred — token upside is thesis-critical for fund returns',
+      decisionSpeed: '4–12 weeks (seed), 8–16 weeks (Series A)',
+      leadOrFollow: 'Will lead and co-lead; major funds anchor rounds',
+      idealMatch: 'Technical founders building novel protocols, clear token mechanic, testnet traction, credentialed crypto background',
+      redFlags: 'Web2 team with "pivot to Web3" narrative · Copy-fork of existing protocol · No token thesis · Valuation above $80M pre-seed',
+      eventBehavior: 'Active in side events and VC dinners. Strong preference for warm intro over cold outreach. Usually conducting ≥5 meetings/day at major conferences.',
+      realNames: 'Paradigm, Multicoin Capital, Pantera Capital, a16z crypto, Placeholder'
+    },
+    {
+      id: 'generalist-vc',
+      name: 'Generalist VC (Crypto Arm)',
+      sub: 'Sequoia · Tiger · General Catalyst',
+      avatar: 'GV',
+      color: 'blue',
+      check: '$5M – $50M',
+      stages: 'Series A → Series B',
+      thesis: 'Institutional infrastructure, enterprise blockchain, compliant DeFi, crossover fintech. Strong preference for equity, revenue model.',
+      structure: 'Priced equity round preferred. Will accept token warrant at Series A if protocol is proven.',
+      token: 'Skeptical. Require equity component. Token-only deals are rare exceptions.',
+      decisionSpeed: '8–20 weeks (extensive due diligence)',
+      leadOrFollow: 'Prefer to lead or co-lead with another top-tier fund',
+      idealMatch: 'Founders with TradFi + crypto background, clear revenue model, compliance-by-design, enterprise traction, $1M+ ARR or equivalent',
+      redFlags: 'Pure DeFi with no equity path · Anonymous team · Regulatory exposure · Token speculation framing · Pre-traction seed ask',
+      eventBehavior: 'Attends Davos side events, Hong Kong FinTech Week, institutional-grade events. Less visible at ETHGlobal or builder conferences.',
+      realNames: 'Sequoia Heritage, Andreessen Horowitz (generalist funds), Tiger Global, General Catalyst'
+    },
+    {
+      id: 'corporate-vc',
+      name: 'Corporate / Strategic VC',
+      sub: 'Coinbase Ventures · Binance Labs · OKX Ventures',
+      avatar: 'CVC',
+      color: 'amber',
+      check: '$250K – $5M',
+      stages: 'Pre-seed → Series A',
+      thesis: 'Companies that extend, complement, or build on their parent ecosystem. Portfolio synergy above standalone returns.',
+      structure: 'Equity (SAFE or priced). Token allocation possible if it strengthens ecosystem.',
+      token: 'Conditional — token listing leverage is often the real currency',
+      decisionSpeed: '4–10 weeks (faster than generalist VCs)',
+      leadOrFollow: 'Rarely lead. Often co-invest or follow. Key value is strategic, not check size.',
+      idealMatch: 'Projects that drive users/volume to parent platform, wallet integrations, tooling that fills portfolio gaps, DeFi on their chain',
+      redFlags: 'Direct competitors to parent company · Chain-agnostic projects with no synergy · Founders who want the logo but not the relationship',
+      eventBehavior: 'Heavily present at their own branded events and ecosystem side events. Active deal pipeline at Token2049, Consensus, Solana Breakpoint.',
+      realNames: 'Coinbase Ventures, Binance Labs, OKX Ventures, Samsung Next, Samsung NEXT, DCG'
+    },
+    {
+      id: 'angel',
+      name: 'Angel / Web3 OG',
+      sub: 'Individual operators · Protocol alumni',
+      avatar: 'AG',
+      color: 'purple',
+      check: '$25K – $500K',
+      stages: 'Pre-seed · Seed',
+      thesis: 'Thesis-agnostic. Follows personal conviction, founder quality, and personal network. Often sector-specific based on own background.',
+      structure: 'SAFE + token allocation. Very flexible on structure if conviction is high.',
+      token: 'Strongly preferred. Token allocation at pre-TGE prices is primary return driver.',
+      decisionSpeed: '1–4 weeks (fastest of all investor types)',
+      leadOrFollow: 'Follow — but highly valuable for validation and warm intros to institutional VCs',
+      idealMatch: 'Pre-seed founder with compelling narrative, strong domain credentials, early momentum. Good for lead-finding: "If you get X to commit, I\'ll follow."',
+      redFlags: 'Founders who undervalue small checks · Projects requiring lead investors · Complex cap table restrictions',
+      eventBehavior: 'Very active in hallways, side events, late-night dinners. Often the most accessible capital at events. Will decide on the spot.',
+      realNames: 'Balaji Srinivasan (type), Naval Ravikant (type), protocol founders/alumni investing personal capital'
+    },
+    {
+      id: 'family-office',
+      name: 'Family Office',
+      sub: 'First-generation digital asset exposure',
+      avatar: 'FO',
+      color: 'amber',
+      check: '$1M – $10M',
+      stages: 'Series A+ (proven traction required)',
+      thesis: 'Diversification into digital assets. Strong preference for RWA, regulated exposure, structured notes. Institutional DeFi is emerging interest.',
+      structure: 'Equity only. Structured notes with principal protection. No SAFT or token-only deals.',
+      token: 'Strong resistance. Need regulated, audited, compliant vehicle.',
+      decisionSpeed: '16–36 weeks (lengthy internal approval + legal)',
+      leadOrFollow: 'Follow institutional VCs. Rarely lead.',
+      idealMatch: 'RWA tokenization platform · Institutional DeFi custody · Regulated stablecoin infrastructure · Clear revenue, audited contracts, named team',
+      redFlags: 'Anonymous team · DeFi-native protocols · Unaudited contracts · Token speculation · Pre-revenue · MiCA/SEC exposure',
+      eventBehavior: 'Attends Paris Blockchain Week, Davos side events, Hong Kong FinTech Week. Not at ETHGlobal or builder conferences. Needs white-glove intro.',
+      realNames: 'European family offices, sovereign wealth fund exploratory arms, UHNW private banking clients'
+    },
+    {
+      id: 'protocol-treasury',
+      name: 'Protocol Treasury / DAO',
+      sub: 'Optimism · Uniswap · Arbitrum · NEAR',
+      avatar: 'PT',
+      color: 'coral',
+      check: '$50K – $2M (grants, not investment)',
+      stages: 'Any — focused on ecosystem contribution, not company stage',
+      thesis: 'Fund builders who extend their ecosystem: tooling, dApps, bridges, developer tooling, user acquisition that benefits the protocol.',
+      structure: 'Grant (non-dilutive). No equity, no SAFEs. Token-denominated or stablecoin.',
+      token: 'N/A — grants are ecosystem tokens or stablecoins, not investment returns',
+      decisionSpeed: '6–16 weeks (DAO governance required for large grants)',
+      leadOrFollow: 'Unique category — not investing, funding. Can be combined with VC round.',
+      idealMatch: 'Developer tooling on their chain · dApp that drives TVL/users · Bridge infrastructure · Hackathon winners extending to full products',
+      redFlags: 'Chain-agnostic projects · Competing protocol teams · Projects with no integration into their stack · Pure research with no deliverables',
+      eventBehavior: 'Active at own ecosystem events (Solana Breakpoint, OP events) and major conferences. BD team focused on developer acquisition.',
+      realNames: 'Optimism RetroPGF, Uniswap Grants Program, Arbitrum DAO, NEAR Foundation, Ethereum Foundation'
+    }
+  ],
+  builders: [
+    {
+      id: 'infra-founder',
+      name: 'Infrastructure Builder',
+      sub: 'ZK rollups · L2s · sequencers · DA layers · middleware',
+      avatar: 'IB',
+      color: 'teal',
+      raiseTarget: '$5M – $30M',
+      stages: 'Seed → Series A',
+      token: 'Usually yes — tokenomics tied to protocol security/governance',
+      bestInvestors: 'Crypto-Native VC (primary) · Protocol Treasury (grants) · Strategic CVCs',
+      pitchAngle: 'Technical differentiation + ecosystem integration story. "We improve X by Y%." Testnet metrics, GitHub activity, audits.',
+      traction: 'Testnet users, developer integrations, anchor protocol partnerships',
+      eventGoal: 'Secure lead investor at Seed/Series A. Establish protocol BD relationships. Recruit technical advisors.',
+      keyMetrics: 'TPS (transactions per second), finality time, security model, cost per transaction, developer integrations',
+      redFlags: '"We\'re building another EVM-compatible chain" without differentiation · No technical whitepaper · Team without protocol engineering background'
+    },
+    {
+      id: 'defi-founder',
+      name: 'DeFi Protocol Founder',
+      sub: 'AMMs · lending protocols · perps · derivatives · yield',
+      avatar: 'DF',
+      color: 'blue',
+      raiseTarget: '$1.5M – $15M',
+      stages: 'Pre-seed → Seed',
+      token: 'Essential — token is the product and the revenue model',
+      bestInvestors: 'Crypto-Native VC · Angels · Protocol Treasury (ecosystem grants)',
+      pitchAngle: 'TVL trajectory, protocol revenue (fees), unique mechanism design, tokenomics with real yield.',
+      traction: 'TVL growth curve, unique active addresses, protocol revenue (annualized), security audits',
+      eventGoal: 'Find lead investor before TGE. Build exchange BD relationships for listing. Recruit DeFi-native advisors.',
+      keyMetrics: 'TVL, daily volume, protocol revenue, DAU, capital efficiency, audit status',
+      redFlags: 'Token-first-product-second · Forked protocol with no novel mechanism · Unaudited contracts · No tokenomics whitepaper'
+    },
+    {
+      id: 'consumer-founder',
+      name: 'Consumer / GameFi Founder',
+      sub: 'Web3 gaming · NFT platforms · social · creator economy',
+      avatar: 'CF',
+      color: 'purple',
+      raiseTarget: '$1M – $10M',
+      stages: 'Seed (often following successful NFT drop or whitelist)',
+      token: 'Often yes — NFT economics or native game token',
+      bestInvestors: 'Crypto VC with gaming thesis · Corporate VC (distribution platform) · Gaming-focused VCs',
+      pitchAngle: 'Retention curve, DAU/MAU ratio, transaction volume, IP quality. "Our game is fun first, Web3 second."',
+      traction: 'DAU, session length, secondary NFT volume, whitelist conversions, revenue per user',
+      eventGoal: 'Platform partnerships (distribution), follow-on from seed investors, exchange listing for native token.',
+      keyMetrics: 'D7/D30 retention, DAU, NFT floor price, secondary volume, revenue per user, guild partnerships',
+      redFlags: 'Play-to-earn-first (dead model) · No playable demo · Fully anonymous team · Token designed before game mechanics'
+    },
+    {
+      id: 'rwa-founder',
+      name: 'RWA / Institutional Founder',
+      sub: 'Tokenized bonds · real estate · private credit · commodities',
+      avatar: 'RWA',
+      color: 'amber',
+      raiseTarget: '$5M – $30M',
+      stages: 'Seed → Series A',
+      token: 'Minimal — equity focus. Regulated token structure where needed.',
+      bestInvestors: 'Generalist VC (crossover thesis) · Family Office · Corporate VC · Institutional DeFi funds',
+      pitchAngle: 'AUM under management, TradFi partnerships, compliance architecture, total addressable market in traditional finance. "We bring $Xtr market on-chain."',
+      traction: 'AUM tokenized, institutional partners, regulatory licenses obtained, revenue from management fees',
+      eventGoal: 'TradFi strategic partnerships, regulatory sandbox participation, institutional investor introductions.',
+      keyMetrics: 'AUM (assets under management), institutional partners, regulatory status, basis points of fees, on-chain liquidity',
+      redFlags: 'No compliance architecture · Anonymous team · DeFi-native framing for institutional product · No TradFi relationship'
+    }
+  ],
+  other: [
+    {
+      id: 'regulator',
+      name: 'Regulator / Policy Advisor',
+      sub: 'EU MiCA · SEC Digital Assets · BIS · FSOC',
+      avatar: 'RG',
+      color: 'coral',
+      goal: 'Build market intelligence, develop sandbox frameworks, assess systemic risk, engage innovators before enforcement',
+      matchValue: 'Provides regulatory clarity, sandbox opportunity, advance warning on enforcement direction. Critical for compliance-first founders.',
+      idealMatchFor: 'RWA founders · Institutional DeFi · Stablecoin issuers · Compliance-platform founders · Policy-focused VCs',
+      eventBehavior: 'Panel-heavy. Prefers structured meetings. Rarely cold approaches. Best engaged through event organizer introductions or policy roundtables.',
+      keyInsight: 'Regulators at events are there to learn as much as enforce. A founder who can explain their product compliantly creates a relationship, not a risk.',
+      redFlags: 'Founders who avoid disclosure · Anonymous teams approaching regulators · Aggressive anti-regulatory narrative'
+    },
+    {
+      id: 'exchange-bd',
+      name: 'Exchange / CEX Business Development',
+      sub: 'Binance · Coinbase · Bybit · OKX · Kraken',
+      avatar: 'BD',
+      color: 'amber',
+      goal: 'Acquire high-quality tokens for listing, drive trading volume, build ecosystem integrations',
+      matchValue: 'Token listing = liquidity + price discovery + retail distribution. A Tier 1 listing can unlock $20M-$200M in volume. Strategic for post-TGE success.',
+      idealMatchFor: 'DeFi protocols pre-TGE · Infrastructure tokens seeking liquidity · GameFi tokens with strong community',
+      eventBehavior: 'Very active at Token2049, Consensus. Often have dedicated "listing review" track. Prefer warm intros from VCs already listed on their exchange.',
+      keyInsight: 'Exchange BD cares about: volume potential, community size, VC backing credibility, and compliance. Don\'t pitch before you have 2 of these 4.',
+      redFlags: 'Unaudited contracts · No community traction · Sub-$10M FDV (too small) · Regulatory flags on token classification'
+    },
+    {
+      id: 'web2-corp',
+      name: 'Web2 Corporate Exploring Web3',
+      sub: 'Banks · Telcos · Media companies · Fintechs',
+      avatar: 'W2',
+      color: 'gray',
+      goal: 'Pilot blockchain use cases, understand Web3 threat/opportunity, develop vendor relationships, sometimes acquire',
+      matchValue: 'Distribution at scale, B2B revenue, strategic partnerships. A bank partnership for an RWA founder can be worth more than a VC round.',
+      idealMatchFor: 'Enterprise blockchain infrastructure · RWA tokenization · NFT/creator economy tools · Compliance platforms',
+      eventBehavior: 'Attends crossover events (Paris Blockchain Week, Web Summit). Often in exploratory mode — not ready to commit capital. Long sales cycles.',
+      keyInsight: 'The decision-maker is rarely the person at the event. Match value is relationship-building for internal champions. Treat as pipeline, not immediate close.',
+      redFlags: 'DeFi-native protocols with no enterprise use case · Anon teams · Token-first companies without B2B model'
+    }
+  ]
+};
+ 
+const DIMENSIONS = [
+  {
+    num: '01',
+    title: 'Stage Fit',
+    color: 'var(--teal)',
+    desc: 'Every investor has a formal or informal stage mandate. Writing a $5M check into a pre-revenue pre-seed deal that will raise a $500K friends-and-family round next is a mismatch — the round structure won\'t work. Conversely, a seed fund can\'t lead a $30M Series B.',
+    example: 'Paradigm (Seed–Series A mandate) + ZK team raising $8M Seed = [STAGE FIT: ✓] Multicoin (Seed–Series A) + RWA startup raising $50M Series B = [STAGE FIT: ✗]'
+  },
+  {
+    num: '02',
+    title: 'Thesis Alignment',
+    color: 'var(--amber)',
+    desc: 'Crypto VCs organize around theses: infrastructure vs. applications, DeFi vs. consumer, L1/L2 vs. middleware. A DeFi-thesis fund sees infrastructure deals as scope creep. Understanding thesis depth vs. breadth tells you whether a meeting will generate a check or just intelligence.',
+    example: 'Multicoin thesis: "Open financial infrastructure" + DeFi lending protocol = [THESIS: strong] Pantera thesis: "Crypto ecosystem growth" + GameFi studio = [THESIS: moderate — not core]'
+  },
+  {
+    num: '03',
+    title: 'Check Size / Valuation',
+    color: 'var(--purple)',
+    desc: 'A fund writing $2M checks into a round where the minimum ticket is $5M is structurally excluded. Equally, a $50M check from a mega-fund into a $3M round creates inappropriate ownership concentration. The math has to work for both parties.',
+    example: '$1M check in $5M seed (20% of round) = workable · $500K check in $20M Series A (2.5% of round) = too small for lead · $25M check in $5M seed = too large, forces down round'
+  },
+  {
+    num: '04',
+    title: 'Token / Equity Structure',
+    color: 'var(--coral)',
+    desc: 'This is often a hard knockout dimension in Web3. A family office legally restricted from holding tokens cannot match with a DeFi protocol that will only issue a SAFT. Conversely, a crypto VC who structures return around token upside may walk away from an equity-only deal.',
+    example: 'Family office (equity only) + Anon DeFi protocol (SAFT only) = [STRUCTURE: knockout] · a16z crypto (token warrant) + RWA platform (SAFE + token warrant) = [STRUCTURE: ✓]'
+  },
+  {
+    num: '05',
+    title: 'Strategic Value',
+    color: 'var(--teal-light)',
+    desc: 'Beyond capital, what does the investor unlock? Portfolio companies, distribution channels, regulatory relationships, exchange listings, exchange BD contacts. A Corporate VC\'s brand and network can be worth 10x the check size. Quantify non-capital value when scoring.',
+    example: 'Coinbase Ventures in wallet startup = [STRATEGIC: very high] exchange integration, user distribution, co-marketing · Generic generalist VC in same deal = [STRATEGIC: low] just capital'
+  },
+  {
+    num: '06',
+    title: 'Risk Profile Compatibility',
+    color: 'var(--amber)',
+    desc: 'Investors and founders have different risk tolerances that must be calibrated. Anonymous teams, unaudited contracts, regulatory exposure, and high FDV multiples are risk flags — but risk tolerance varies. A crypto angel may love an anon DeFi team. A family office will not.',
+    example: 'Anonymous team + Angel OG = [RISK: compatible] · Anonymous team + Family Office = [RISK: knockout] · Unaudited contracts + Crypto VC seed = [RISK: amber — needs audit before close]'
+  }
+];
+ 
+const EXAMPLES = [
+  {
+    investorName: 'Paradigm Capital',
+    investorType: 'Crypto-Native VC',
+    founderName: 'Axiom Protocol',
+    founderType: 'ZK-rollup infrastructure (Seed, $7M)',
+    investorColor: '#1D9E75',
+    founderColor: '#7F77DD',
+    score: 5,
+    verdict: 'Must-Meet',
+    verdictColor: 'var(--teal-light)',
+    dimensions: [
+      { name: 'Stage Fit', val: '5/5', color: 'var(--teal-light)' },
+      { name: 'Thesis', val: '5/5', color: 'var(--teal-light)' },
+      { name: 'Check Size', val: '5/5', color: 'var(--teal-light)' },
+      { name: 'Structure', val: '5/5', color: 'var(--teal-light)' },
+      { name: 'Strategic', val: '5/5', color: 'var(--teal-light)' },
+      { name: 'Risk Fit', val: '4/5', color: '#85B7EB' }
+    ],
+    rationale: `Paradigm has a documented thesis on ZK cryptography since 2021 — <strong>Axiom is in the core of their conviction zone</strong>. The $7M Seed falls squarely in Paradigm's $2M–$15M seed range. ZK infrastructure teams that build in public (testnet, GitHub) are Paradigm's prototype investment. The token warrant structure (SAFE + token warrant at TGE) is Paradigm's standard instrument, so no structural friction. Strategic value is exceptional: Paradigm's portfolio includes StarkWare, Optimism, and other ZK-adjacent projects — <strong>the introductions alone could be worth $20M+</strong> in future protocol integrations. One amber flag: if the team is first-time founders (vs. credentialed cryptographers), Paradigm may want proof-of-capability before committing to lead.`,
+    positives: [
+      'ZK infrastructure = core Paradigm thesis since 2021',
+      'Seed round size aligns with fund strategy',
+      'Token warrant structure already standard for Paradigm',
+      'Portfolio synergy: StarkWare, Optimism connections'
+    ],
+    ambers: ['First-time founder team may need technical advisor board to close'],
+    negatives: []
+  },
+  {
+    investorName: 'Meridian Family Office',
+    investorType: 'Family Office (first crypto exposure)',
+    founderName: 'ShadowYield Finance',
+    founderType: 'Anon-team DeFi lending (Seed, SAFT)',
+    investorColor: '#EF9F27',
+    founderColor: '#D85A30',
+    score: 1,
+    verdict: 'Hard Mismatch',
+    verdictColor: '#F09575',
+    dimensions: [
+      { name: 'Stage Fit', val: '2/5', color: 'var(--amber)' },
+      { name: 'Thesis', val: '1/5', color: '#F09575' },
+      { name: 'Check Size', val: '2/5', color: 'var(--amber)' },
+      { name: 'Structure', val: '1/5', color: '#F09575' },
+      { name: 'Strategic', val: '1/5', color: '#F09575' },
+      { name: 'Risk Fit', val: '1/5', color: '#F09575' }
+    ],
+    rationale: `<strong>Four simultaneous knockout flags</strong> make this the clearest possible mismatch. Family offices entering crypto require: named team, equity structure, audit certification, regulatory path. ShadowYield has none of these. The SAFT structure means the family office would hold an unregistered token claim — a legal red flag for any institutional LP. Anonymous teams signal zero accountability if things go wrong. <strong>Even if the DeFi protocol is technically innovative, the risk profile is categorically incompatible.</strong> Attempting to force this match wastes both parties' time and damages credibility of the matching platform.`,
+    positives: [],
+    ambers: ['Protocol may be genuinely innovative — might match with crypto-native angel instead'],
+    negatives: [
+      'Family office requires equity structure — SAFT is a knockout',
+      'Anonymous team = no accountability, KYC impossible',
+      'No audit certification = legal exposure for institutional investor',
+      'DeFi lending = outside thesis (seeking RWA, regulated exposure)',
+      'Pre-revenue pre-traction = too early for family office mandate'
+    ]
+  },
+  {
+    investorName: 'Coinbase Ventures',
+    investorType: 'Corporate VC / Strategic',
+    founderName: 'Lattice Wallet',
+    founderType: 'Self-custody hardware wallet startup (Seed, $4M)',
+    investorColor: '#378ADD',
+    founderColor: '#1D9E75',
+    score: 4,
+    verdict: 'High Potential',
+    verdictColor: '#85B7EB',
+    dimensions: [
+      { name: 'Stage Fit', val: '4/5', color: '#85B7EB' },
+      { name: 'Thesis', val: '4/5', color: '#85B7EB' },
+      { name: 'Check Size', val: '3/5', color: 'var(--amber)' },
+      { name: 'Structure', val: '4/5', color: '#85B7EB' },
+      { name: 'Strategic', val: '5/5', color: 'var(--teal-light)' },
+      { name: 'Risk Fit', val: '4/5', color: '#85B7EB' }
+    ],
+    rationale: `The strategic value here is <strong>exceptional and asymmetric</strong>. Coinbase Ventures backing a self-custody wallet delivers: Coinbase DeFi Wallet co-marketing, potential SDK integration, access to 110M Coinbase user base, and institutional credibility. The check size ($1M-$2M from CoinbaseV) is smaller than what a pure-financial VC would write, but the non-capital value more than compensates. One amber: <strong>Coinbase could view this as competitive</strong> (their own wallet product competes with self-custody alternatives). Strong founders need to frame positioning as "complementary to Coinbase Wallet, not competitive" — emphasizing hardware security where Coinbase has no product.`,
+    positives: [
+      'Ecosystem fit: drives users to Coinbase DeFi products',
+      'SDK integration opportunity worth more than check',
+      'Access to 110M Coinbase users as distribution',
+      'Coinbase brand as social proof for institutional fundraising'
+    ],
+    ambers: [
+      'Potential competitive overlap with Coinbase Wallet — must frame positioning carefully',
+      'CoinbaseV check size ($1-2M) may be below round target — needs co-lead'
+    ],
+    negatives: []
+  },
+  {
+    investorName: 'Sequoia Heritage (Crossover)',
+    investorType: 'Generalist VC — Crypto Arm',
+    founderName: 'Meridian RWA',
+    founderType: 'Tokenized private credit platform (Series A, $18M)',
+    investorColor: '#7F77DD',
+    founderColor: '#EF9F27',
+    score: 4,
+    verdict: 'High Potential',
+    verdictColor: '#85B7EB',
+    dimensions: [
+      { name: 'Stage Fit', val: '5/5', color: 'var(--teal-light)' },
+      { name: 'Thesis', val: '4/5', color: '#85B7EB' },
+      { name: 'Check Size', val: '5/5', color: 'var(--teal-light)' },
+      { name: 'Structure', val: '5/5', color: 'var(--teal-light)' },
+      { name: 'Strategic', val: '3/5', color: 'var(--amber)' },
+      { name: 'Risk Fit', val: '4/5', color: '#85B7EB' }
+    ],
+    rationale: `Sequoia Heritage is exploring the crossover between TradFi and tokenized assets — Meridian RWA is a textbook fit. <strong>Equity-only structure is a major compatibility driver</strong>: no token exposure means Sequoia's LP base (pension funds, university endowments) faces no regulatory complications. The $18M Series A ask at $60-80M valuation is comfortable for Sequoia's fund size. The amber on Strategic Value reflects Sequoia's limited Web3 portfolio network — they can open TradFi doors but fewer DeFi ecosystem connections than a crypto-native VC. Ideal co-lead structure: <strong>Sequoia leads equity, add a crypto-native VC for Web3 ecosystem access.</strong>`,
+    positives: [
+      'Equity-only structure aligns with Sequoia fund mandate',
+      'Series A stage and $18M ask within range',
+      'Named team, institutional partnerships, compliance architecture',
+      'TradFi background of founders reduces Sequoia due diligence burden'
+    ],
+    ambers: [
+      'Sequoia has limited Web3 ecosystem network — add crypto-native co-investor',
+      'Thesis is crossover not pure crypto — deal may require internal champion'
+    ],
+    negatives: []
+  },
+  {
+    investorName: 'EU MiCA Policy Team',
+    investorType: 'Regulator / Policy Advisor',
+    founderName: 'Complify',
+    founderType: 'DeFi compliance & regulatory reporting SaaS',
+    investorColor: '#D85A30',
+    founderColor: '#5DCAA5',
+    score: 4,
+    verdict: 'Strategic Intel Match',
+    verdictColor: '#85B7EB',
+    dimensions: [
+      { name: 'Capital Value', val: 'N/A', color: 'var(--text-sec)' },
+      { name: 'Intel Value', val: '5/5', color: 'var(--teal-light)' },
+      { name: 'Sandbox Fit', val: '5/5', color: 'var(--teal-light)' },
+      { name: 'Timing', val: '4/5', color: '#85B7EB' },
+      { name: 'Credibility', val: '4/5', color: '#85B7EB' },
+      { name: 'Mutual Benefit', val: '5/5', color: 'var(--teal-light)' }
+    ],
+    rationale: `This is a <strong>non-capital match with outsized strategic value</strong>. The EU MiCA implementation team is actively seeking DeFi companies that can help them understand technical compliance realities. Complify's regulatory reporting tool is precisely the kind of product MiCA supervisors need to understand. Match outcomes: (1) Complify gets advance regulatory intelligence on reporting standards, (2) MiCA team gets real-world input for compliance tooling requirements, (3) sandbox pilot opportunity for Complify to test against real regulatory framework. <strong>This match won't generate a check, but it may be worth more than a $3M seed round</strong> in regulatory moat-building.`,
+    positives: [
+      'Regulatory sandbox pilot opportunity = regulatory moat',
+      'Advance MiCA implementation intelligence for product roadmap',
+      'Regulator needs exactly this product to understand compliance landscape',
+      'Credibility boost: "MiCA-aligned by design" in fundraising narrative'
+    ],
+    ambers: ['Not a capital-generating match — needs to be combined with investor meetings'],
+    negatives: []
+  },
+  {
+    investorName: 'Binance Labs',
+    investorType: 'Corporate VC / Strategic',
+    founderName: 'Nexus Games',
+    founderType: 'BNB Chain GameFi mobile studio (Seed, $3M)',
+    investorColor: '#EF9F27',
+    founderColor: '#AFA9EC',
+    score: 3,
+    verdict: 'Worth Exploring (with caution)',
+    verdictColor: 'var(--amber)',
+    dimensions: [
+      { name: 'Stage Fit', val: '4/5', color: '#85B7EB' },
+      { name: 'Thesis', val: '4/5', color: '#85B7EB' },
+      { name: 'Check Size', val: '3/5', color: 'var(--amber)' },
+      { name: 'Structure', val: '3/5', color: 'var(--amber)' },
+      { name: 'Strategic', val: '4/5', color: '#85B7EB' },
+      { name: 'Risk Fit', val: '2/5', color: '#F09575' }
+    ],
+    rationale: `Binance Labs is a natural fit on paper — they actively invest in BNB Chain ecosystem projects, GameFi included. But <strong>the Binance association carries material platform risk</strong> that sophisticated co-investors (US-based VCs, family offices) may flag as a dealbreaker in due diligence. Post-2023 regulatory scrutiny on Binance means that having Binance Labs as a lead investor can make US-focused co-investment rounds harder to close. Founders should position Binance as a strategic co-investor (not lead), and ensure the round includes at least one independent VC. <strong>Match score reflects value with eyes open about risk.</strong>`,
+    positives: [
+      'BNB Chain ecosystem integration = user distribution',
+      'Binance Labs BD team can facilitate token listing',
+      'Stage and check size in range',
+      'Binance ecosystem grants available alongside investment'
+    ],
+    ambers: [
+      'Binance association may create friction with US co-investors',
+      'Recommend positioning as strategic co-investor, not lead'
+    ],
+    negatives: ['Post-2023 regulatory scrutiny on Binance parent = platform risk for portfolio company']
+  },
+  {
+    investorName: 'Optimism RetroPGF Round',
+    investorType: 'Protocol Treasury (Non-dilutive grant)',
+    founderName: 'Superbridge',
+    founderType: 'Cross-chain bridge tooling on OP Stack',
+    investorColor: '#F09575',
+    founderColor: '#85B7EB',
+    score: 5,
+    verdict: 'Must-Meet (grant category)',
+    verdictColor: 'var(--teal-light)',
+    dimensions: [
+      { name: 'Ecosystem Fit', val: '5/5', color: 'var(--teal-light)' },
+      { name: 'Impact', val: '5/5', color: 'var(--teal-light)' },
+      { name: 'Structure', val: '5/5', color: 'var(--teal-light)' },
+      { name: 'Technical', val: '5/5', color: 'var(--teal-light)' },
+      { name: 'Timing', val: '4/5', color: '#85B7EB' },
+      { name: 'Sustainability', val: '4/5', color: '#85B7EB' }
+    ],
+    rationale: `<strong>Textbook RetroPGF match.</strong> Optimism's retroactive funding model explicitly rewards past public goods contributions to the OP Stack — Superbridge is infrastructure that improves cross-chain liquidity for all Optimism users. Non-dilutive grant means no cap table impact, so this can be pursued alongside a traditional equity/token round. The impact case is direct: bridge tooling reduces fragmentation in the OP ecosystem and increases TVL. <strong>Critical framing tip:</strong> RetroPGF applications must quantify past impact (transactions bridged, TVL moved, developer users) — not future promises. Founders who understand this framing have 3x higher acceptance rates.`,
+    positives: [
+      'Built on OP Stack = direct ecosystem contribution',
+      'Non-dilutive: $100K-$500K without equity dilution',
+      'Quantifiable impact (bridge transactions = measurable TVL contribution)',
+      'Precedent: multiple bridge projects funded in prior rounds'
+    ],
+    ambers: [
+      'RetroPGF requires past impact data, not future roadmap',
+      'Grant amount uncertain ($50K-$500K range) — supplement with VC round'
+    ],
+    negatives: []
+  },
+  {
+    investorName: 'Multicoin Capital',
+    investorType: 'Crypto-Native VC (Solana ecosystem)',
+    founderName: 'Phantom Protocol',
+    founderType: 'Ethereum-native DEX aggregator (Seed, $6M)',
+    investorColor: '#1D9E75',
+    founderColor: '#378ADD',
+    score: 2,
+    verdict: 'Low Signal',
+    verdictColor: '#F09575',
+    dimensions: [
+      { name: 'Stage Fit', val: '4/5', color: '#85B7EB' },
+      { name: 'Thesis', val: '2/5', color: '#F09575' },
+      { name: 'Check Size', val: '4/5', color: '#85B7EB' },
+      { name: 'Structure', val: '3/5', color: 'var(--amber)' },
+      { name: 'Strategic', val: '2/5', color: '#F09575' },
+      { name: 'Risk Fit', val: '3/5', color: 'var(--amber)' }
+    ],
+    rationale: `<strong>Ecosystem mismatch</strong> is the primary friction here. Multicoin has a very public long thesis on Solana, and their portfolio is heavily Solana-native (Jupiter, Drift, Tensor). An Ethereum-native DEX aggregator sits awkwardly — Multicoin might view this as capital going to a competing ecosystem. Stage and check size work, but <strong>strategic value is negative from Multicoin's perspective</strong>: successfully funding Ethereum DeFi could be seen as contra-thesis. Some crypto VCs explicitly refuse cross-chain or multi-chain positioning because it dilutes network effect bets. A better match target: Paradigm, 1kx, or Uniswap Ventures for Ethereum DeFi infrastructure.`,
+    positives: ['Stage and check size compatible', 'DeFi narrative is adjacent to Multicoin interests'],
+    ambers: ['Not impossible — Multicoin has made some non-Solana investments — but requires strong pitch'],
+    negatives: [
+      'Multicoin thesis is Solana-centric — Ethereum DEX is contra-portfolio',
+      'Strategic value negative: funding a competing ecosystem undermines Multicoin\'s bet',
+      'Better-fit investors exist (Paradigm, 1kx) — opportunity cost argument against this match'
+    ]
+  }
+];
+ 
+const PRACTICE_SCENARIOS = [
+  {
+    profile1: { type: 'INVESTOR', name: 'Pantera Capital', details: 'Crypto-native VC. Thesis: DeFi infrastructure, cross-chain protocols. Check: $2M–$10M, Seed–Series A. Token warrant preferred. 15 years in crypto, deep DeFi portfolio.' },
+    profile2: { type: 'FOUNDER', name: 'CrossVault Finance', details: 'Building cross-chain yield aggregator on Ethereum + Arbitrum. Seed round $5M. Named team (ex-Aave, ex-Compound). $12M TVL in testnet. Token launch planned Q3.' },
+    score: 5, verdict: 'Must-Meet', verdictColor: 'var(--teal-light)',
+    rationale: 'Pantera\'s DeFi infrastructure thesis is a direct match for a cross-chain yield aggregator. The ex-Aave, ex-Compound team profile is exactly what Pantera values — credentialed DeFi builders, not outsiders. $5M Seed within mandate. Token warrant structure ready on both sides. $12M TVL in testnet is strong pre-launch traction signal. The Aave/Compound alumni network gives Pantera portfolio synergies. This is a tier-1 match on all six dimensions.',
+    flags: ['+DeFi infrastructure = core thesis', '+Token warrant structure ready', '+Ex-Aave/Compound = credentialed team', '+$12M testnet TVL = strong traction signal', '+Seed size in mandate range']
+  },
+  {
+    profile1: { type: 'INVESTOR', name: 'Carlisle Family Office', details: 'European family office. First crypto investment. Seeking: regulated exposure, no anonymous teams, equity structure. AUM €800M. Time horizon: 5+ years. No token exposure.' },
+    profile2: { type: 'FOUNDER', name: 'DarkPool Protocol', details: 'Anonymous team. DeFi on-chain dark pool for institutional trades. Raising $3M SAFT. No audit yet. No regulatory analysis. Token TGE in 6 months.' },
+    score: 1, verdict: 'Hard Mismatch', verdictColor: '#F09575',
+    rationale: 'Multiple simultaneous knockouts. The SAFT structure alone disqualifies this for a family office requiring equity. Anonymous team is a second knockout — family offices need full KYC and accountability. No audit before TGE is a third red flag. The "dark pool" positioning will raise regulatory alarm bells. Even if the protocol is technically interesting, no path to alignment exists without fundamental restructuring of team identity, deal structure, and compliance posture.',
+    flags: ['✗ SAFT structure = family office knockout', '✗ Anonymous team = KYC impossible', '✗ Unaudited contracts = legal exposure', '✗ Dark pool = regulatory red flag', '✗ Pre-revenue pre-traction = too early']
+  },
+  {
+    profile1: { type: 'INVESTOR', name: 'Solana Foundation Grants', details: 'Protocol treasury. Focus: Solana ecosystem builders. Non-dilutive grants $50K-$300K. Seeking: developer tooling, DeFi on Solana, user-acquisition apps. No equity, token denominated grants.' },
+    profile2: { type: 'FOUNDER', name: 'SolScan Pro', details: 'Advanced Solana blockchain explorer with analytics dashboard. 180K MAU. Dev tooling SaaS. Open-source core. Looking for non-dilutive funding to expand API and indexing infrastructure.' },
+    score: 5, verdict: 'Must-Meet (grant)', verdictColor: 'var(--teal-light)',
+    rationale: 'Perfect grant match. SolScan Pro is literally the kind of developer tooling the Solana Foundation exists to fund — 180K MAU proves ecosystem impact already. Open-source core aligns with public goods framing. The non-dilutive structure is ideal for a team that wants to extend infrastructure without equity dilution. Impact is directly quantifiable: API calls served, developer accounts, indexing throughput. Grant application practically writes itself. This also doesn\'t preclude a parallel VC round.',
+    flags: ['+Solana-native = direct ecosystem fit', '+Developer tooling = core grant priority', '+180K MAU = quantifiable past impact', '+Open-source = public goods framing', '+Non-dilutive = no cap table conflict']
+  },
+  {
+    profile1: { type: 'INVESTOR', name: 'Okta Ventures (Corp VC)', details: 'Enterprise software corporate VC. Exploring: identity infrastructure for Web3. Check: $500K-$3M. Equity only. Stage: Seed-Series A. Thesis: enterprise identity, auth, access management with Web3 extension.' },
+    profile2: { type: 'FOUNDER', name: 'Spruce ID Systems', details: 'Decentralized identity (DID) + verifiable credentials platform. B2B SaaS model. Integrates with Ethereum + enterprise SSO. Series A, $12M raise. $800K ARR. Named team (ex-Google, ex-Okta). No token.' },
+    score: 5, verdict: 'Must-Meet', verdictColor: 'var(--teal-light)',
+    rationale: 'Exceptional alignment on every dimension. Okta Ventures backing the next evolution of enterprise identity is thesis-perfect — Spruce ID is literally building on top of Okta\'s paradigm with Web3 extension. Ex-Okta team means deep domain credibility and cultural fit. Equity-only deal structure removes all structural friction. $800K ARR makes this a de-risked Series A, not a spec investment. The strategic value is asymmetric: Okta could eventually acquire Spruce ID, making this investment optionally accretive. Corporate VCs love optionality.',
+    flags: ['+Identity × Web3 = core Okta Ventures thesis', '+Ex-Okta team = credibility and cultural fit', '+Equity only = perfect structural match', '+$800K ARR = de-risked for corporate VC', '+Acquisition optionality = strategic upside']
+  },
+  {
+    profile1: { type: 'INVESTOR', name: 'Andreessen Horowitz (a16z crypto)', details: 'Tier-1 crypto-native VC. Thesis: protocol infrastructure, consumer crypto, gaming. Stages: Seed–Series B. Check: $5M-$50M. Will lead large rounds. Token warrant standard. Strong US presence.' },
+    profile2: { type: 'FOUNDER', name: 'Lens Protocol', details: 'Open-source decentralized social graph on Polygon. Non-profit foundation structure. No equity, no token raise. Developer ecosystem model. Seeking: grants and ecosystem partnerships, not VC capital.' },
+    score: 2, verdict: 'Structural Mismatch',  verdictColor: '#F09575',
+    rationale: 'a16z crypto writes VC checks for equity or token warrants — Lens Protocol\'s foundation structure makes it categorically ineligible for VC investment. The protocol itself might be exactly in a16z\'s thesis (consumer crypto, social), but the absence of an investable vehicle is a structural knockout. a16z might engage as an ecosystem partner or grant supporter (they have separate charitable vehicles), but not as a VC investor. The match failure here is not thesis — it\'s legal structure. Worth introducing to a16z\'s partnership team, not their investment team.',
+    flags: ['✗ Foundation structure = no equity or token investment vehicle', '✗ a16z writes VC checks, not grants', '+Thesis alignment is strong (social, consumer crypto)', '~ May work as ecosystem partner, not investor', '~ Introduce to a16z partnership/BD, not investment team']
+  }
+];
+ 
+let selectedPersona = null;
+let practiceIndex = 0;
+let revealed = false;
+ 
+function switchTab(idx) {
+  document.querySelectorAll('.section').forEach((s,i) => s.classList.toggle('active', i===idx));
+  document.querySelectorAll('.tab').forEach((t,i) => t.classList.toggle('active', i===idx));
+}
+ 
+function renderPersonas() {
+  function renderGrid(containerId, detailId, personas, type) {
+    const grid = document.getElementById(containerId);
+    const detail = document.getElementById(detailId);
+    personas.forEach(p => {
+      const card = document.createElement('div');
+      card.className = 'persona-card';
+      card.id = 'pc-' + p.id;
+      const colorMap = { teal: '#1D9E75', blue: '#378ADD', amber: '#EF9F27', purple: '#7F77DD', coral: '#D85A30', gray: '#7A8BA5' };
+      const bg = colorMap[p.color] || '#1D9E75';
+      card.innerHTML = `
+        <div class="persona-avatar" style="background:${bg}22;color:${bg}">${p.avatar}</div>
+        <div class="persona-name">${p.name}</div>
+        <div class="persona-sub">${p.sub}</div>
+      `;
+      card.onclick = () => {
+        document.querySelectorAll('.persona-card').forEach(c => c.classList.remove('selected'));
+        if (selectedPersona === p.id) { selectedPersona = null; detail.innerHTML = ''; return; }
+        selectedPersona = p.id;
+        card.classList.add('selected');
+        renderPersonaDetail(detail, p, type);
+      };
+      grid.appendChild(card);
+    });
+  }
+  renderGrid('investor-grid', 'investor-detail', PERSONAS.investors, 'investor');
+  renderGrid('builder-grid', 'builder-detail', PERSONAS.builders, 'builder');
+  renderGrid('other-grid', 'other-detail', PERSONAS.other, 'other');
+}
+ 
+function renderPersonaDetail(container, p, type) {
+  const fields = type === 'investor' ? [
+    ['Check size', p.check], ['Stages', p.stages], ['Thesis', p.thesis],
+    ['Structure', p.structure], ['Token preference', p.token],
+    ['Decision speed', p.decisionSpeed], ['Lead/Follow', p.leadOrFollow],
+    ['Ideal match', p.idealMatch], ['Red flags', p.redFlags],
+    ['Event behavior', p.eventBehavior]
+  ] : type === 'builder' ? [
+    ['Raise target', p.raiseTarget], ['Stages', p.stages], ['Token', p.token],
+    ['Best investors', p.bestInvestors], ['Pitch angle', p.pitchAngle],
+    ['Traction signals', p.traction], ['Event goal', p.eventGoal],
+    ['Key metrics', p.keyMetrics], ['Red flags', p.redFlags]
+  ] : [
+    ['Primary goal', p.goal], ['Match value', p.matchValue],
+    ['Ideal match for', p.idealMatchFor], ['Event behavior', p.eventBehavior],
+    ['Key insight', p.keyInsight], ['Red flags', p.redFlags]
+  ];
+  container.innerHTML = `<div class="persona-detail"><div class="detail-row" style="border-bottom:2px solid var(--teal-dim);padding-bottom:0.75rem;margin-bottom:0.25rem"><span style="font-family:Syne,sans-serif;font-size:1.1rem;font-weight:700;color:#fff">${p.name}</span><span class="tag tag-teal" style="margin-left:auto">${p.sub.split('·')[0].trim()}</span></div>${fields.map(([l,v])=>`<div class="detail-row"><div class="detail-label">${l}</div><div class="detail-val">${v}</div></div>`).join('')}</div>`;
+}
+ 
+function renderDimensions() {
+  const grid = document.getElementById('dimensions-grid');
+  const colors = ['var(--teal)', 'var(--amber)', 'var(--purple)', 'var(--coral)', 'var(--teal-light)', 'var(--amber)'];
+  DIMENSIONS.forEach((d,i) => {
+    const card = document.createElement('div');
+    card.className = 'dim-card';
+    card.innerHTML = `
+      <div class="dim-number" style="color:${colors[i]}">${d.num}</div>
+      <div style="height:3px;width:32px;background:${colors[i]};border-radius:2px;margin-bottom:0.75rem"></div>
+      <div class="dim-title">${d.title}</div>
+      <div class="dim-desc">${d.desc}</div>
+      <div class="dim-example"><span>example →</span> ${d.example}</div>
+    `;
+    card.style.setProperty('--dim-color', colors[i]);
+    card.querySelector('::before');
+    grid.appendChild(card);
+  });
+}
+ 
+function renderExamples() {
+  const container = document.getElementById('examples-container');
+  EXAMPLES.forEach((ex, idx) => {
+    const card = document.createElement('div');
+    card.className = 'match-card';
+    const scoreColor = ex.score >= 4 ? 'var(--teal-light)' : ex.score === 3 ? 'var(--amber)' : '#F09575';
+    card.innerHTML = `
+      <div class="match-header">
+        <div>
+          <div class="match-profiles">
+            <div class="profile-pill" style="background:${ex.investorColor}22;color:${ex.investorColor};border:1px solid ${ex.investorColor}44">
+              ${ex.investorName}
+            </div>
+            <div class="match-arrow">×</div>
+            <div class="profile-pill" style="background:${ex.founderColor}22;color:${ex.founderColor};border:1px solid ${ex.founderColor}44">
+              ${ex.founderName}
+            </div>
+          </div>
+          <div style="margin-top:0.5rem;font-size:12px;color:var(--text-sec)">${ex.investorType} &nbsp;·&nbsp; ${ex.founderType}</div>
+        </div>
+        <div>
+          <div class="match-score-badge" style="color:${scoreColor}">${ex.score}/5</div>
+          <div class="match-score-label">${ex.verdict.toUpperCase()}</div>
+        </div>
+      </div>
+      <div class="match-body" id="body-${idx}">
+        <div class="dim-scores">${ex.dimensions.map(d=>`<div class="dim-score-item"><div class="dim-score-name">${d.name}</div><div class="dim-score-val" style="color:${d.color}">${d.val}</div></div>`).join('')}</div>
+        <div class="rationale-block">
+          <h5>MATCH RATIONALE</h5>
+          <p>${ex.rationale}</p>
+        </div>
+        <div class="flag-list">
+          ${ex.positives.map(f=>`<div class="flag-item"><div class="flag-icon flag-pos">+</div><span>${f}</span></div>`).join('')}
+          ${ex.ambers.map(f=>`<div class="flag-item"><div class="flag-icon flag-neu">~</div><span>${f}</span></div>`).join('')}
+          ${ex.negatives.map(f=>`<div class="flag-item"><div class="flag-icon flag-neg">✗</div><span>${f}</span></div>`).join('')}
+        </div>
+      </div>
+      <button class="match-toggle" id="toggle-${idx}" onclick="toggleExample(${idx})">REVEAL MATCH ANALYSIS ↓</button>
+    `;
+    container.appendChild(card);
+  });
+}
+ 
+function toggleExample(idx) {
+  const body = document.getElementById(`body-${idx}`);
+  const btn = document.getElementById(`toggle-${idx}`);
+  const open = body.classList.toggle('open');
+  btn.textContent = open ? 'COLLAPSE ↑' : 'REVEAL MATCH ANALYSIS ↓';
+}
+ 
+function renderPractice() {
+  const container = document.getElementById('practice-container');
+  container.innerHTML = '';
+  revealed = false;
+  const sc = PRACTICE_SCENARIOS[practiceIndex];
+  const scoreColor = sc.score >= 4 ? 'var(--teal-light)' : sc.score === 3 ? 'var(--amber)' : '#F09575';
+  const dots = PRACTICE_SCENARIOS.map((_,i) => `<div class="prog-dot ${i < practiceIndex ? 'done' : i === practiceIndex ? 'current' : ''}"></div>`).join('');
+  container.innerHTML = `
+    <div class="progress-indicator">${dots}</div>
+    <div class="practice-card">
+      <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--text-sec);letter-spacing:0.15em">SCENARIO ${practiceIndex+1} OF ${PRACTICE_SCENARIOS.length}</div>
+      <div style="font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:700;color:#fff;margin-top:0.35rem">Assess this match — score it before revealing the answer</div>
+      <div class="practice-profiles">
+        <div class="practice-profile-card">
+          <div class="practice-profile-type" style="color:var(--teal)">${sc.profile1.type}</div>
+          <div class="practice-profile-name">${sc.profile1.name}</div>
+          <div class="practice-profile-detail">${sc.profile1.details}</div>
+        </div>
+        <div class="practice-vs">×</div>
+        <div class="practice-profile-card">
+          <div class="practice-profile-type" style="color:var(--amber)">${sc.profile2.type}</div>
+          <div class="practice-profile-name">${sc.profile2.name}</div>
+          <div class="practice-profile-detail">${sc.profile2.details}</div>
+        </div>
+      </div>
+      <div style="margin-top:0.5rem">
+        <button class="reveal-btn" onclick="revealPractice(${practiceIndex})">Reveal match verdict</button>
+        ${practiceIndex < PRACTICE_SCENARIOS.length-1 ? `<button class="next-btn" onclick="nextPractice()">Next scenario →</button>` : `<button class="next-btn" onclick="resetPractice()">Restart from beginning</button>`}
+      </div>
+      <div class="practice-reveal" id="practice-reveal">
+        <div class="verdict-row">
+          <div class="verdict-score" style="color:${scoreColor}">${sc.score}/5</div>
+          <div>
+            <div class="verdict-label">${sc.verdict}</div>
+            <div class="verdict-sub">Expert assessment</div>
+          </div>
+        </div>
+        <div style="font-size:13px;color:var(--text-sec);line-height:1.75;margin-bottom:1rem">${sc.rationale}</div>
+        <div>${sc.flags.map(f => {
+          const isPos = f.startsWith('+');
+          const isNeg = f.startsWith('✗');
+          const cls = isPos ? 'flag-pos' : isNeg ? 'flag-neg' : 'flag-neu';
+          const sym = isPos ? '+' : isNeg ? '✗' : '~';
+          return `<div class="flag-item"><div class="flag-icon ${cls}">${sym}</div><span>${f.substring(f.indexOf(' ')+1)}</span></div>`;
+        }).join('')}</div>
+      </div>
+    </div>
+  `;
+}
+ 
+function revealPractice(idx) {
+  document.getElementById('practice-reveal').classList.add('open');
+}
+function nextPractice() {
+  practiceIndex = Math.min(practiceIndex+1, PRACTICE_SCENARIOS.length-1);
+  renderPractice();
+}
+function resetPractice() {
+  practiceIndex = 0;
+  renderPractice();
+}
+ 
+renderPersonas();
+renderDimensions();
+renderExamples();
+renderPractice();
+</script>
+</body>
+</html>
